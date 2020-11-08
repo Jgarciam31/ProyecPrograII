@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>LIBRERIA UMG</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>      
+
+        <script>
+            $(document).ready(function () {
+                
+                
+                $("#btnGuardar").click(function(){
+		   $.ajax({
+                        url: "ServletLibro",
+                        dataType: "html",
+                        method: "POST",
+                        data:$("#id_formulario" ).serialize(),
+                        success: function (respuesta) {
+                            if (respuesta==='1') {
+                                alert('Libro ingresado con exito')
+                              
+                                document.getElementById('CODIGO').value=''
+                                document.getElementById('ISBN').value=''
+                                document.getElementById('NOMBRE').value=''
+                                document.getElementById('ANIO').value=''
+                                document.getElementById('AUTOR_ID').value=''
+                                document.getElementById('CATEGORIA_IDCATEGORIA').value=''
+                                document.getElementById('EDITORIAL_IDEDITORIAL').value=''
+
+                            }else{
+                                
+                               alert('Ha fallado')
+                            }
+                           
+                        },
+                        error: function (objAjax, estado, excepcion) {
+                            alert("Error al mostrar registros");
+                        }
+                    })
+	});
+           
+
+            })
+        </script>
+    </head>
+    <body style="background-color: gray">
+        <nav class="navbar navbar-expand-lg navbar-black bg-secondary">
+            <a class="navbar-brand" href="index.html">LIBRERIA UMG</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Catálogos
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+
+                            <a class="dropdown-item" href="Libros.html">Productos</a>
+                          
+                        </div>
+                    </li>
+
+                </ul>   
+            </div>
+        </nav>
+                    <div class="container">
+                <div class="row">
+
+                    <div class="col-md-auto ">
+                        <a href="anañirLibro.html" class="btn btn-success mr-0" > <i class="fas fa-plus">  </i> NUEVO LIBRO</a>
+                    </div>
+                </div>
+            </div>
+        <div class="container-md" style="min-height: 900px;">       
+            <h1 class="mt-5 mb-5"> AGREGAR LIBRO </h1> 
+
+            <div class="alert alert-success" role="alert" style="display: none;" id="msjExito" >
+                ¡Libro agregado correctamente!
+            </div>
+
+            <div class="alert alert-danger" role="alert" style="display: none;" id="msjError">
+                Error al registrar, verifique todos los campos
+            </div>
+
+                    <div class="row">
+
+                  
+                         <form id="id_formulario">
+                <div class="form-group" style="min-height: 900px;>
+           
+                    <label for="CODIGO">CODIGO LIBRO</label>
+                    <input type="text" class="form-control" id="CODIGO"  name="CODIGO" placeholder="" required>
+                    <label for="formGroupExampleInput">ISBN</label> 
+                    <input type="text" class="form-control" id="ISBN"  name="ISBN" placeholder="" required>
+                    <label for="formGroupExampleInput">NOMBRE</label>
+                    <input type="text" class="form-control" id="NOMBRE"  name="NOMBRE" placeholder="" required>
+                    <label for="formGroupExampleInput">AÑO</label>
+                    <input type="text" class="form-control" id="ANIO"  name="ANIO" placeholder="" required>
+                    
+                    <label for="cars">AUTOR</label>
+                    <select  class="form-control" name="AUTOR_ID" id="AUTOR_ID" required>
+                    <option value="1">Viktor Frankl</option>
+                    <option value="2">Miguel Ángel Asturias</option>
+                    <option value="3">JOHN GREEN</option>
+                    <option value="4">Aurelio Baldor</option>
+                    <option value="5">Anonimo</option>
+                    </select>
+                    
+                    <label for="cars">CATEGORIA</label>
+                    <select  class="form-control" name="CATEGORIA_IDCATEGORIA" id="CATEGORIA_IDCATEGORIA" required>
+                    <option value="1">SUSPENSO</option>
+                    <option value="2">MIEDO</option>
+                    <option value="3">FANTACIA</option>
+                    <option value="4">DOCUMENTAL</option>
+                    <option value="5">MATEMATICAS</option>
+                    <option value="6">EDUCACION GENERAL</option>
+                    <option value="7">HISTORIA</option>
+                    
+                    </select><label for="cars">EDITORIAL</label>
+                    <select  class="form-control" name="EDITORIAL_IDEDITORIAL" id="EDITORIAL_IDEDITORIAL" required>
+                    <option value="1">HERDER</option>
+                    <option value="2">ALLCA XX</option>
+                    <option value="3">EDITORIAL LOSADA</option>
+                    <option value="4">EDITORIAL ENI</option>
+                    <option value="5">GRUPO EDITORIAL PATRIA</option>
+                    <option value="6">PENGUIN RADOM HOUSE GRUPO  </option>
+                    </select>
+                    <button type="button" id="btnGuardar" class="btn btn-primary" >  Guardar</button>   
+
+                    <input type="text" value="REGISTRO" name="control" hidden>
+                </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+</form>           
+
+</div>
+
+</body>
+</html>
